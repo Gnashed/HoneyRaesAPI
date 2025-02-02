@@ -11,18 +11,31 @@ List<Customer> customers = new List<Customer>
     new Customer(2, "Tion Blackmon", "1234 Apple Street, Nashville, TN, 37000"),
     new Customer(3, "Jane Though", "345 E. Rock St., New York, NY, 10001"),
 };
+
 List<Employee> employees = new List<Employee>
 {
     new Employee(1, "Tion Blackmon", "Software Engineer"),
     new Employee(2, "Mia Meadows", "Business Analyst"),
 };
+
 List<ServiceTicket> serviceTickets = new List<ServiceTicket>
 {
-    new ServiceTicket(1,"", 1, null, "Customer was having issues with their keyboard.", false, new DateTime(2025, 1, 22)),
-    new ServiceTicket(2,"", 2, null,"Locked out of cloud backup app", false, new DateTime(2025, 1, 4)),
-    new ServiceTicket(3,"", null, 1, "Employee lost external storage drive and needs a replacement.", true, null),
-    new ServiceTicket(4,"", null, 2, "Employee forgot their password to Outlook.", true, new DateTime(2024, 12, 23)),
-    new ServiceTicket(5,"", null, null, "", false, null),
+    new ServiceTicket(1,"", 1, null, "Customer was having issues with their keyboard.",
+            false, new DateTime(2025, 1, 22)
+        ),
+    new ServiceTicket(
+        2,"", 2, null,"Locked out of cloud backup app", 
+        false, new DateTime(2025, 1, 4)
+        ),
+    new ServiceTicket(
+        3,"", null, 1, "Employee lost external storage drive and needs a replacement.", 
+        true, null),
+    new ServiceTicket(
+        4,"", null, 2, "Employee forgot their password to Outlook.",
+        true, new DateTime(2024, 12, 23)
+        ),
+    new ServiceTicket(
+        5,"", null, null, "", false, null),
 };
 
 var builder = WebApplication.CreateBuilder(args);
