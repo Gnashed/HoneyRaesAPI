@@ -40,6 +40,16 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMobileApp", policy =>
+    { 
+        policy.WithOrigins("http://localhost:8081", "http://10.0.0.42") // Add your mobile app's IP or Expo URL
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -56,8 +66,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowMobileApp");
+
 // Endpoints
 app.MapGet("/servicetickets", () => serviceTickets);
 app.MapGet("/servicetickets/{id}", (int id) => serviceTickets.FirstOrDefault(st => st.Id == id));
+app.MapGet("/employees", () => employees);
+
+// Bind to all IPs
+app.Urls.Add("http://0.0.0.0:5297");
 
 app.Run();
