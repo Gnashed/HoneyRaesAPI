@@ -64,7 +64,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(); // This line might not be needed.
 
 app.UseCors("AllowMobileApp");
 
@@ -72,6 +72,9 @@ app.UseCors("AllowMobileApp");
 app.MapGet("/servicetickets", () => serviceTickets);
 app.MapGet("/servicetickets/{id}", (int id) => serviceTickets.FirstOrDefault(st => st.Id == id));
 app.MapGet("/employees", () => employees);
+app.MapGet("/employees/{id}", (int id) => employees.FirstOrDefault(e => e.Id == id));
+app.MapGet("/customers", () => customers);
+app.MapGet("/customers/{id}", (int id) => customers.FirstOrDefault(c => c.Id == id));
 
 // Bind to all IPs
 app.Urls.Add("http://0.0.0.0:5297");
