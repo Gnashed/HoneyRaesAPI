@@ -70,11 +70,36 @@ app.UseCors("AllowMobileApp");
 
 // Endpoints
 app.MapGet("/servicetickets", () => serviceTickets);
-app.MapGet("/servicetickets/{id}", (int id) => serviceTickets.FirstOrDefault(st => st.Id == id));
+app.MapGet("/servicetickets/{id}", (int id) =>
+{
+    ServiceTicket serviceTicket = serviceTickets.FirstOrDefault(st => st.Id == id);
+    if (serviceTicket == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(serviceTicket);
+});
 app.MapGet("/employees", () => employees);
-app.MapGet("/employees/{id}", (int id) => employees.FirstOrDefault(e => e.Id == id));
+app.MapGet("/employees/{id}", (int id) =>
+{
+    Employee employee = employees.FirstOrDefault(e => e.Id == id);
+    if (employee == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(employee);
+});
+
 app.MapGet("/customers", () => customers);
-app.MapGet("/customers/{id}", (int id) => customers.FirstOrDefault(c => c.Id == id));
+app.MapGet("/customers/{id}", (int id) =>
+{
+    Customer customer = customers.FirstOrDefault(c => c.Id == id);
+    if (customer == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(customer);
+});
 
 // Bind to all IPs
 app.Urls.Add("http://0.0.0.0:5297");
