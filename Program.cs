@@ -20,11 +20,11 @@ List<Employee> employees = new List<Employee>
 
 List<ServiceTicket> serviceTickets = new List<ServiceTicket>
 {
-    new ServiceTicket(1,"", 1, null, "Customer was having issues with their keyboard.",
+    new ServiceTicket(1,"Customer - keyboard issue", 1, null, "Customer was having issues with their keyboard.",
             false, new DateTime(2025, 1, 22)
         ),
     new ServiceTicket(
-        2,"", 2, null,"Locked out of cloud backup app", 
+        2,"", null, 1,"Locked out of cloud backup app", 
         false, new DateTime(2025, 1, 4)
         ),
     new ServiceTicket(
@@ -35,7 +35,7 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
         true, new DateTime(2024, 12, 23)
         ),
     new ServiceTicket(
-        5,"", null, null, "", false, null),
+        5,"customer - pw reset", 2, null, "Needs password reset.", false, null),
 };
 
 var builder = WebApplication.CreateBuilder(args);
@@ -77,6 +77,7 @@ app.MapGet("/servicetickets/{id}", (int id) =>
     {
         return Results.NotFound();
     }
+    serviceTicket.Employee = employees.FirstOrDefault(e => e.Id == serviceTicket.EmployeeId);
     return Results.Ok(serviceTicket);
 });
 app.MapGet("/employees", () => employees);
@@ -87,6 +88,7 @@ app.MapGet("/employees/{id}", (int id) =>
     {
         return Results.NotFound();
     }
+    employee.ServiceTickets = serviceTickets.Where(st => st.EmployeeId == id).ToList();
     return Results.Ok(employee);
 });
 
@@ -98,6 +100,7 @@ app.MapGet("/customers/{id}", (int id) =>
     {
         return Results.NotFound();
     }
+    customer.ServiceTickets = serviceTickets.Where(st => st.CustomerId == id).ToList();
     return Results.Ok(customer);
 });
 
