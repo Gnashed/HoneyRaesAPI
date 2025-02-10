@@ -68,7 +68,9 @@ app.UseHttpsRedirection(); // This line might not be needed.
 
 app.UseCors("AllowMobileApp");
 
-// Endpoints
+/*
+* ================================================ ENDPOINTS ================================================
+*/
 app.MapGet("/servicetickets", () => serviceTickets);
 app.MapGet("/servicetickets/{id}", (int id) =>
 {
@@ -91,7 +93,6 @@ app.MapGet("/employees/{id}", (int id) =>
     employee.ServiceTickets = serviceTickets.Where(st => st.EmployeeId == id).ToList();
     return Results.Ok(employee);
 });
-
 app.MapGet("/customers", () => customers);
 app.MapGet("/customers/{id}", (int id) =>
 {
@@ -102,6 +103,14 @@ app.MapGet("/customers/{id}", (int id) =>
     }
     customer.ServiceTickets = serviceTickets.Where(st => st.CustomerId == id).ToList();
     return Results.Ok(customer);
+});
+
+app.MapPost("/servicetickets", (ServiceTicket serviceTicket) =>
+{
+    // Line below is a way for creating a new id. SQL handles this automatically once we go over SQL and databases.
+    serviceTicket.Id = serviceTickets.Max(st => st.Id) + 1;
+    serviceTickets.Add(serviceTicket);
+    return serviceTicket;
 });
 
 // Bind to all IPs
