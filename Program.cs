@@ -35,7 +35,7 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
         true, new DateTime(2024, 12, 23)
         ),
     new ServiceTicket(
-        5,"customer - pw reset", 2, null, "Needs password reset.", false, null),
+        5,"Employee - pw reset", null, null, "Needs password reset for Outlook.", false, null),
 };
 
 var builder = WebApplication.CreateBuilder(args);
@@ -71,8 +71,8 @@ app.UseCors("AllowMobileApp");
 /*
 * ================================================ ENDPOINTS ================================================
 */
-app.MapGet("/servicetickets", () => serviceTickets);
-app.MapGet("/servicetickets/{id}", (int id) =>
+app.MapGet("api/servicetickets", () => serviceTickets);
+app.MapGet("api/servicetickets/{id}", (int id) =>
 {
     ServiceTicket serviceTicket = serviceTickets.FirstOrDefault(st => st.Id == id);
     if (serviceTicket == null)
@@ -82,8 +82,8 @@ app.MapGet("/servicetickets/{id}", (int id) =>
     serviceTicket.Employee = employees.FirstOrDefault(e => e.Id == serviceTicket.EmployeeId);
     return Results.Ok(serviceTicket);
 });
-app.MapGet("/employees", () => employees);
-app.MapGet("/employees/{id}", (int id) =>
+app.MapGet("api/employees", () => employees);
+app.MapGet("api/employees/{id}", (int id) =>
 {
     Employee employee = employees.FirstOrDefault(e => e.Id == id);
     if (employee == null)
@@ -93,8 +93,8 @@ app.MapGet("/employees/{id}", (int id) =>
     employee.ServiceTickets = serviceTickets.Where(st => st.EmployeeId == id).ToList();
     return Results.Ok(employee);
 });
-app.MapGet("/customers", () => customers);
-app.MapGet("/customers/{id}", (int id) =>
+app.MapGet("api/customers", () => customers);
+app.MapGet("api/customers/{id}", (int id) =>
 {
     Customer customer = customers.FirstOrDefault(c => c.Id == id);
     if (customer == null)
@@ -105,15 +105,31 @@ app.MapGet("/customers/{id}", (int id) =>
     return Results.Ok(customer);
 });
 
-app.MapPost("/servicetickets", (ServiceTicket serviceTicket) =>
+app.MapPost("api/servicetickets", (ServiceTicket serviceTicket) =>
 {
     // Line below is a way for creating a new id. SQL handles this automatically once we go over SQL and databases.
     serviceTicket.Id = serviceTickets.Max(st => st.Id) + 1;
     serviceTickets.Add(serviceTicket);
     return serviceTicket;
 });
+// serviceTicket is the updated ticket from the req body.
+app.MapPut("api/servicetickets/{id}", (int id, ServiceTicket serviceTicket) =>
+{
+    ServiceTicket? ticketToUpdate = serviceTickets.FirstOrDefault(st => st.Id == id);
+    int ticketIndex = serviceTickets.IndexOf(ticketToUpdate);
+    if (ticketToUpdate == null)
+    {
+        return Results.NotFound();
+    }
+    if (id != serviceTicket.Id)
+    {
+        return Results.BadRequest();
+    }
+    serviceTickets[ticketIndex] = serviceTicket;
+    return Results.Ok();
+});
 
-app.MapDelete("servicetickets/{id}", (int id) =>
+app.MapDelete("api/servicetickets/{id}", (int id) =>
 {
     ServiceTicket? serviceTicket = serviceTickets.FirstOrDefault(st => st.Id == id);
     if (serviceTicket == null)
@@ -123,7 +139,7 @@ app.MapDelete("servicetickets/{id}", (int id) =>
     serviceTickets.Remove(serviceTicket);
     return Results.Ok(serviceTicket);
 });
-// Bind to all IPs
-app.Urls.Add("http://0.0.0.0:5297");
+// Bind to all IPs. 
+// app.Urls.Add("http://0.0.0.0:5297");    // TODO: Might need to update port number.
 
 app.Run();
