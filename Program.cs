@@ -105,6 +105,7 @@ app.MapGet("api/customers/{id}", (int id) =>
     return Results.Ok(customer);
 });
 
+// serviceTicket is the updated ticket from the req body.
 app.MapPost("api/servicetickets", (ServiceTicket serviceTicket) =>
 {
     // Line below is a way for creating a new id. SQL handles this automatically once we go over SQL and databases.
@@ -112,7 +113,13 @@ app.MapPost("api/servicetickets", (ServiceTicket serviceTicket) =>
     serviceTickets.Add(serviceTicket);
     return serviceTicket;
 });
-// serviceTicket is the updated ticket from the req body.
+// For marking a service ticket complete with a timestamp.
+app.MapPost("api/servicetickets/{id}/complete", (int id) =>
+{
+    ServiceTicket? ticketToComplete = serviceTickets.FirstOrDefault(st => st.Id == id);
+    ticketToComplete.DateCompleted = DateTime.Today;
+});
+
 app.MapPut("api/servicetickets/{id}", (int id, ServiceTicket serviceTicket) =>
 {
     ServiceTicket? ticketToUpdate = serviceTickets.FirstOrDefault(st => st.Id == id);
