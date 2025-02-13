@@ -35,7 +35,7 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
         true, new DateTime(2024, 12, 23)
         ),
     new ServiceTicket(
-        5,"Employee - pw reset", null, null, "Needs password reset for Outlook.", false, null),
+        5,"Employee - pw reset", null, null, "Needs password reset for Outlook.", true, null),
 };
 
 var builder = WebApplication.CreateBuilder(args);
@@ -72,6 +72,15 @@ app.UseCors("AllowMobileApp");
 * ================================================ ENDPOINTS ================================================
 */
 app.MapGet("api/servicetickets", () => serviceTickets);
+// Emergency Tickets
+app.MapGet("api/servicetickets/emergencies", (bool emergency) =>
+{
+    var emergencyTickets = serviceTickets
+        .Where(st =>
+            (st.DateCompleted == null) && (emergency ? st.Emergency : true)
+        ).ToList();
+    return Results.Ok(emergencyTickets);
+});
 app.MapGet("api/servicetickets/{id}", (int id) =>
 {
     ServiceTicket serviceTicket = serviceTickets.FirstOrDefault(st => st.Id == id);
@@ -82,6 +91,7 @@ app.MapGet("api/servicetickets/{id}", (int id) =>
     serviceTicket.Employee = employees.FirstOrDefault(e => e.Id == serviceTicket.EmployeeId);
     return Results.Ok(serviceTicket);
 });
+
 app.MapGet("api/employees", () => employees);
 app.MapGet("api/employees/{id}", (int id) =>
 {
