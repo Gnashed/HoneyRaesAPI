@@ -126,12 +126,6 @@ app.MapGet("api/servicetickets/{id}", (int id) =>
     serviceTicket.Employee = employees.FirstOrDefault(e => e.Id == serviceTicket.EmployeeId);
     return Results.Ok(serviceTicket);
 });
-app.MapGet("api/servicetickets/unassigned", () =>
-{
-    var unassignedTickets = serviceTickets.Where(st => 
-        st.CustomerId == null && st.EmployeeId == null).ToList();
-    return Results.Ok(unassignedTickets);
-});
 app.MapGet("api/employees/{id}", (int id) =>
 {
     Employee employee = employees.FirstOrDefault(e => e.Id == id);
@@ -145,7 +139,16 @@ app.MapGet("api/employees/{id}", (int id) =>
 // Available Employees.
 app.MapGet("api/employees/available", () =>
 {
-    var availableTickets = serviceTickets.Where(st => st.)
+    // Extracting the employee id of service tickets that are incomplete, but assigned. Should be a list of ints'.
+    var assignedEmployeeIds = serviceTickets
+        .Where(st => st.DateCompleted == null && st.EmployeeId.HasValue)
+        .Select(st => st.EmployeeId.Value) // Need `.HasValue` since we made the employeeId nullable in the class file.
+        .ToList();
+    // All employees not in the list above.
+    var unassignedEmployees = employees
+        .Where(e => !assignedEmployeeIds.Contains(e.Id))
+        .ToList();
+    return Results.Ok(unassignedEmployees);
 });
 app.MapGet("api/customers/{id}", (int id) =>
 {
