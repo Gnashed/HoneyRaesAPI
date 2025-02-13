@@ -71,7 +71,11 @@ app.UseCors("AllowMobileApp");
 /*
 * ================================================ ENDPOINTS ================================================
 */
+
+// GET ENDPOINTS
 app.MapGet("api/servicetickets", () => serviceTickets);
+app.MapGet("api/employees", () => employees);
+app.MapGet("api/customers", () => customers);
 // Emergency Tickets
 app.MapGet("api/servicetickets/emergencies", () =>
 {
@@ -91,8 +95,12 @@ app.MapGet("api/servicetickets/{id}", (int id) =>
     serviceTicket.Employee = employees.FirstOrDefault(e => e.Id == serviceTicket.EmployeeId);
     return Results.Ok(serviceTicket);
 });
-
-app.MapGet("api/employees", () => employees);
+app.MapGet("api/servicetickets/unassigned", () =>
+{
+    var unassignedTickets = serviceTickets.Where(st => 
+        st.CustomerId == null && st.EmployeeId == null).ToList();
+    return Results.Ok(unassignedTickets);
+});
 app.MapGet("api/employees/{id}", (int id) =>
 {
     Employee employee = employees.FirstOrDefault(e => e.Id == id);
@@ -103,7 +111,6 @@ app.MapGet("api/employees/{id}", (int id) =>
     employee.ServiceTickets = serviceTickets.Where(st => st.EmployeeId == id).ToList();
     return Results.Ok(employee);
 });
-app.MapGet("api/customers", () => customers);
 app.MapGet("api/customers/{id}", (int id) =>
 {
     Customer customer = customers.FirstOrDefault(c => c.Id == id);
@@ -115,6 +122,7 @@ app.MapGet("api/customers/{id}", (int id) =>
     return Results.Ok(customer);
 });
 
+// POST ENDPOINTS
 // serviceTicket is the updated ticket from the req body.
 app.MapPost("api/servicetickets", (ServiceTicket serviceTicket) =>
 {
@@ -130,6 +138,7 @@ app.MapPost("api/servicetickets/{id}/complete", (int id) =>
     ticketToComplete.DateCompleted = DateTime.Today;
 });
 
+// PUT ENDPOINTS
 app.MapPut("api/servicetickets/{id}", (int id, ServiceTicket serviceTicket) =>
 {
     ServiceTicket? ticketToUpdate = serviceTickets.FirstOrDefault(st => st.Id == id);
@@ -146,6 +155,7 @@ app.MapPut("api/servicetickets/{id}", (int id, ServiceTicket serviceTicket) =>
     return Results.Ok();
 });
 
+// DELETE ENDPOINTS
 app.MapDelete("api/servicetickets/{id}", (int id) =>
 {
     ServiceTicket? serviceTicket = serviceTickets.FirstOrDefault(st => st.Id == id);
