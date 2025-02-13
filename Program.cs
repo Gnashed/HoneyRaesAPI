@@ -73,11 +73,11 @@ app.UseCors("AllowMobileApp");
 */
 app.MapGet("api/servicetickets", () => serviceTickets);
 // Emergency Tickets
-app.MapGet("api/servicetickets/emergencies", (bool emergency) =>
+app.MapGet("api/servicetickets/emergencies", () =>
 {
     var emergencyTickets = serviceTickets
         .Where(st =>
-            (st.DateCompleted == null) && (emergency ? st.Emergency : true)
+            (st.DateCompleted == null) && (st.Emergency)
         ).ToList();
     return Results.Ok(emergencyTickets);
 });
