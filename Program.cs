@@ -16,6 +16,16 @@ List<Employee> employees = new List<Employee>
 {
     new Employee(1, "Tion Blackmon", "Software Engineer"),
     new Employee(2, "Mia Meadows", "Business Analyst"),
+    new Employee(3, "Liam Anderson", "Project Manager"),
+    new Employee(4, "Sophia Chang", "UX Designer"),
+    new Employee(5, "Ethan Martinez", "DevOps Engineer"),
+    new Employee(6, "Ava Hernandez", "Quality Assurance Analyst"),
+    new Employee(7, "Noah Thompson", "Product Owner"),
+    new Employee(8, "Olivia Brown", "Data Scientist"),
+    new Employee(9, "Mason Lee", "Frontend Developer"),
+    new Employee(10, "Isabella Patel", "Backend Developer"),
+    new Employee(11, "Lucas Nguyen", "Security Specialist"),
+    new Employee(12, "Amelia Wilson", "Technical Support Engineer")
 };
 
 List<ServiceTicket> serviceTickets = new List<ServiceTicket>
@@ -36,6 +46,27 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
         ),
     new ServiceTicket(
         5,"Employee - pw reset", null, null, "Needs password reset for Outlook.", true, null),
+    
+    new ServiceTicket(6, "Customer - printer issue", 2, null, "Printer is not connecting to the network.", 
+        false, new DateTime(2024, 11, 15)),
+
+    new ServiceTicket(7, "", null, 3, "Software installation request for project management tool.", 
+        false, new DateTime(2024, 10, 30)),
+
+    new ServiceTicket(8, "", null, 3, "Account locked due to too many failed login attempts.", 
+        true, new DateTime(2024, 9, 12)),
+
+    new ServiceTicket(9, "Employee - software crash", null, 4, "Design software crashes frequently.", 
+        false, new DateTime(2024, 8, 5)),
+
+    new ServiceTicket(10, "", 4, null, "New hardware request - additional RAM for laptop.", 
+        false, new DateTime(2024, 7, 20)),
+
+    new ServiceTicket(11, "Customer - email issue", 5, null, "Unable to send emails to external domains.", 
+        true, new DateTime(2024, 6, 25)),
+
+    new ServiceTicket(12, "", null, 5, "VPN connection dropping intermittently.", 
+        false, new DateTime(2024, 5, 14))
 };
 
 var builder = WebApplication.CreateBuilder(args);
