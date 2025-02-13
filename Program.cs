@@ -21,7 +21,7 @@ List<Employee> employees = new List<Employee>
 List<ServiceTicket> serviceTickets = new List<ServiceTicket>
 {
     new ServiceTicket(1,"Customer - keyboard issue", 1, null, "Customer was having issues with their keyboard.",
-            false, new DateTime(2025, 1, 22)
+            false, new DateTime(2024, 1, 22)
         ),
     new ServiceTicket(
         2,"", null, 1,"Locked out of cloud backup app", 
@@ -120,6 +120,23 @@ app.MapGet("api/customers/{id}", (int id) =>
     }
     customer.ServiceTickets = serviceTickets.Where(st => st.CustomerId == id).ToList();
     return Results.Ok(customer);
+});
+app.MapGet("api/customers/inactive-customers", () =>
+{
+    DateTime currentDate = DateTime.Now;
+    // Need to add `.hasValue` to both CustomerId and DateCompleted. Without it on CustomerId,
+    // you are comparing bool to int? which isn't valid. DateCompleted needs `.hasValue`
+    // because we want to make sure we are comparing actual values before doing any calculations on it.
+    // Lastly, `.Value` was added to `.st.DateCompleted`. This gets the actual value that is stored in the object's
+    // DateTime property. Also wanted to note that `.TotalDays` gets the value of the timespan that is being calculated.
+    // The value can be a whole number or a floating-point number.
+    var inactiveCustomers = serviceTickets
+        .Where(st =>
+            st.CustomerId.HasValue && 
+            st.DateCompleted.HasValue && 
+            (currentDate - st.DateCompleted.Value).TotalDays > 365)
+        .ToList();
+    return Results.Ok(inactiveCustomers);
 });
 
 // POST ENDPOINTS
