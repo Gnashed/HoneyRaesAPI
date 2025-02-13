@@ -8,7 +8,7 @@ using HoneyRaesAPI.Models; // Imports all the names of HoneyRaesAPI.Models into 
 List<Customer> customers = new List<Customer>
 {
     new Customer(1, "John Dough", "456 Guap Rd, Madison, TN, 37001"),
-    new Customer(2, "Tion Blackmon", "1234 Apple Street, Nashville, TN, 37000"),
+    new Customer(2, "Mariah Rice", "1234 Apple Street, Los Angeles, CA, 90001"),
     new Customer(3, "Jane Though", "345 E. Rock St., New York, NY, 10001"),
 };
 
@@ -51,22 +51,22 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
         false, new DateTime(2024, 11, 15)),
 
     new ServiceTicket(7, "", null, 3, "Software installation request for project management tool.", 
-        false, new DateTime(2024, 10, 30)),
+        false, null),
 
     new ServiceTicket(8, "", null, 3, "Account locked due to too many failed login attempts.", 
-        true, new DateTime(2024, 9, 12)),
+        true, null),
 
-    new ServiceTicket(9, "Employee - software crash", null, 4, "Design software crashes frequently.", 
-        false, new DateTime(2024, 8, 5)),
+    new ServiceTicket(9, "Employee - software crash", null, null, "Design software crashes frequently.", 
+        false, null),
 
-    new ServiceTicket(10, "", 4, null, "New hardware request - additional RAM for laptop.", 
-        false, new DateTime(2024, 7, 20)),
+    new ServiceTicket(10, "", null, 2, "New hardware request - additional RAM for laptop.", 
+        false, null),
 
-    new ServiceTicket(11, "Customer - email issue", 5, null, "Unable to send emails to external domains.", 
-        true, new DateTime(2024, 6, 25)),
+    new ServiceTicket(11, "Customer - email issue", null, 8, "Unable to send emails to external domains.", 
+        true, null),
 
-    new ServiceTicket(12, "", null, 5, "VPN connection dropping intermittently.", 
-        false, new DateTime(2024, 5, 14))
+    new ServiceTicket(12, "", null, 8, "VPN connection dropping intermittently.", 
+        false, null)
 };
 
 var builder = WebApplication.CreateBuilder(args);
@@ -141,6 +141,11 @@ app.MapGet("api/employees/{id}", (int id) =>
     }
     employee.ServiceTickets = serviceTickets.Where(st => st.EmployeeId == id).ToList();
     return Results.Ok(employee);
+});
+// Available Employees.
+app.MapGet("api/employees/available", () =>
+{
+    var availableTickets = serviceTickets.Where(st => st.)
 });
 app.MapGet("api/customers/{id}", (int id) =>
 {
