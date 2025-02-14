@@ -188,6 +188,16 @@ app.UseCors("AllowMobileApp");
 app.MapGet("api/servicetickets", () => serviceTickets);
 app.MapGet("api/employees", () => employees);
 app.MapGet("api/customers", () => customers);
+
+// Completed Tickets ordered by completion date (oldest first).
+app.MapGet("api/servicetickets/completed-oldest-sorted", () =>
+{
+    var completedTickets = serviceTickets
+        .Where(st => st.DateCompleted.HasValue && st.CustomerId.HasValue && st.EmployeeId.HasValue)
+        .OrderBy(st => st.DateCompleted)
+        .ToList();
+    return Results.Ok(completedTickets);
+});
 // Emergency Tickets
 app.MapGet("api/servicetickets/emergencies", () =>
 {
