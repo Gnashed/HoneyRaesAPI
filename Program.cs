@@ -25,13 +25,13 @@ List<Customer> customers = new List<Customer>
 List<Employee> employees = new List<Employee>
 {
     new Employee(1, "Tion Blackmon", "Software Engineer"),
-    new Employee(2, "Mia Meadows", "Business Analyst"),
+    new Employee(2, "Mia Meadows", "Technical Analyst"),
     new Employee(3, "Liam Anderson", "Project Manager"),
-    new Employee(4, "Sophia Chang", "UX Designer"),
+    new Employee(4, "Sophia Chang", "Senior Tech Analyst"),
     new Employee(5, "Ethan Martinez", "DevOps Engineer"),
     new Employee(6, "Ava Hernandez", "Quality Assurance Analyst"),
     new Employee(7, "Noah Thompson", "Product Owner"),
-    new Employee(8, "Olivia Brown", "Data Scientist"),
+    new Employee(8, "Olivia Brown", "Technical Analyst"),
     new Employee(9, "Mason Lee", "Frontend Developer"),
     new Employee(10, "Isabella Patel", "Backend Developer"),
     new Employee(11, "Lucas Nguyen", "Security Specialist"),
@@ -42,97 +42,97 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
 {
     new ServiceTicket(
         1,
-        "Customer - keyboard issue",
-        1, 
-        null, 
-        "Customer was having issues with their keyboard.",
+        "Keyboard issue",
+        4, 
+        2, 
+        "Customer was having issues with their Bluetooth keyboard.",
         false, 
         new DateTime(2024, 1, 22)
     ),
     new ServiceTicket(
         2,
-        "", 
-        null, 
-        1,
+        "Account Locked", 
+        5, 
+        2,
         "Locked out of cloud backup app", 
         false, 
         new DateTime(2025, 1, 4)
     ),
     new ServiceTicket(
         3,
-        "", 
-        null, 
-        1, 
-        "Employee lost external storage drive and needs a replacement.", 
-        true, 
-        null
+        "External SSD Replacement Needed",
+        null,
+        2,
+        "Employee lost external storage drive and needs a replacement.",
+        true,
+        new DateTime(2025, 2, 12)
     ),
     new ServiceTicket(
         4,
-        "", 
-        null, 
-        2, 
+        "Outlook PW Issue",
+        9,
+        8,
         "Employee forgot their password to Outlook.",
-        true, 
+        true,
         new DateTime(2024, 12, 23)
     ),
     new ServiceTicket(
         5,
-        "Employee - pw reset", 
-        null, 
-        null, 
+        "Outlook pw reset", 
+        10, 
+        4, 
         "Needs password reset for Outlook.", 
         true, 
-        null
+        new DateTime(2025, 2, 6)
     ),
     new ServiceTicket(
         6, 
         "Customer - printer issue", 
-        2, 
-        4, 
+        6, 
+        4,
         "Printer is not connecting to the network.", 
         false, 
-        new DateTime(2024, 11, 15)
+        new DateTime(2025, 2, 5)
     ),
     new ServiceTicket(
         7, 
-        "", 
-        8, 
-        4, 
+        "",
+        8,
+        4,
         "Software installation request for project management tool.", 
-        false, 
+        false,
         null
     ),
     new ServiceTicket(
         8, 
-        "", 
-        6, 
-        4, 
-        "Account locked due to too many failed login attempts.", 
+        "Out of date NPM Package.", 
+        11, 
+        1, 
+        "NPM package for our calendar integration is out of date.",
         true, 
-        null
+        new DateTime(2025, 2, 3)
     ),
     new ServiceTicket(
         9, 
-        "Employee - software crash", 
-        null, 
-        null, 
-        "Design software crashes frequently.", 
-        false, 
-        null
+        "Endpoint issue on backend.",
+        13,
+        1,
+        "I'm receiving an error that a GET request failed due to an issue. It doesn't specify (sorry).",
+        false,
+        new DateTime(2025, 2, 4)
     ),
     new ServiceTicket(
         10, 
-        "", 
-        null, 
-        2, 
-        "New hardware request - additional RAM for laptop.", 
+        "Frontend issue on EAP landing page.", 
+        7, 
+        1, 
+        "The form to submit information isn't rendering after clicking on any of the fields. Very odd issue.", 
         false, 
-        null
+        new DateTime(2025, 2, 12)
     ),
     new ServiceTicket(
         11, 
-        "Customer - email issue", 
+        "Email outgoing issue", 
         null, 
         8, 
         "Unable to send emails to external domains.", 
@@ -141,7 +141,7 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
     ),
     new ServiceTicket(
         12, 
-        "", 
+        "VPN Connection Problems", 
         null, 
         8, 
         "VPN connection dropping intermittently.", 
