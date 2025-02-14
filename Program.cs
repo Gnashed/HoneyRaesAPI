@@ -40,43 +40,114 @@ List<Employee> employees = new List<Employee>
 
 List<ServiceTicket> serviceTickets = new List<ServiceTicket>
 {
-    new ServiceTicket(1,"Customer - keyboard issue", 1, null, "Customer was having issues with their keyboard.",
-            false, new DateTime(2024, 1, 22)
-        ),
     new ServiceTicket(
-        2,"", null, 1,"Locked out of cloud backup app", 
-        false, new DateTime(2025, 1, 4)
-        ),
+        1,
+        "Customer - keyboard issue",
+        1, 
+        null, 
+        "Customer was having issues with their keyboard.",
+        false, 
+        new DateTime(2024, 1, 22)
+    ),
     new ServiceTicket(
-        3,"", null, 1, "Employee lost external storage drive and needs a replacement.", 
-        true, null),
+        2,
+        "", 
+        null, 
+        1,
+        "Locked out of cloud backup app", 
+        false, 
+        new DateTime(2025, 1, 4)
+    ),
     new ServiceTicket(
-        4,"", null, 2, "Employee forgot their password to Outlook.",
-        true, new DateTime(2024, 12, 23)
-        ),
+        3,
+        "", 
+        null, 
+        1, 
+        "Employee lost external storage drive and needs a replacement.", 
+        true, 
+        null
+    ),
     new ServiceTicket(
-        5,"Employee - pw reset", null, null, "Needs password reset for Outlook.", true, null),
-    
-    new ServiceTicket(6, "Customer - printer issue", 2, 4, "Printer is not connecting to the network.", 
-        false, new DateTime(2024, 11, 15)),
-
-    new ServiceTicket(7, "", 8, 4, "Software installation request for project management tool.", 
-        false, null),
-
-    new ServiceTicket(8, "", 6, 4, "Account locked due to too many failed login attempts.", 
-        true, null),
-
-    new ServiceTicket(9, "Employee - software crash", null, null, "Design software crashes frequently.", 
-        false, null),
-
-    new ServiceTicket(10, "", null, 2, "New hardware request - additional RAM for laptop.", 
-        false, null),
-
-    new ServiceTicket(11, "Customer - email issue", null, 8, "Unable to send emails to external domains.", 
-        true, null),
-
-    new ServiceTicket(12, "", null, 8, "VPN connection dropping intermittently.", 
-        false, null)
+        4,
+        "", 
+        null, 
+        2, 
+        "Employee forgot their password to Outlook.",
+        true, 
+        new DateTime(2024, 12, 23)
+    ),
+    new ServiceTicket(
+        5,
+        "Employee - pw reset", 
+        null, 
+        null, 
+        "Needs password reset for Outlook.", 
+        true, 
+        null
+    ),
+    new ServiceTicket(
+        6, 
+        "Customer - printer issue", 
+        2, 
+        4, 
+        "Printer is not connecting to the network.", 
+        false, 
+        new DateTime(2024, 11, 15)
+    ),
+    new ServiceTicket(
+        7, 
+        "", 
+        8, 
+        4, 
+        "Software installation request for project management tool.", 
+        false, 
+        null
+    ),
+    new ServiceTicket(
+        8, 
+        "", 
+        6, 
+        4, 
+        "Account locked due to too many failed login attempts.", 
+        true, 
+        null
+    ),
+    new ServiceTicket(
+        9, 
+        "Employee - software crash", 
+        null, 
+        null, 
+        "Design software crashes frequently.", 
+        false, 
+        null
+    ),
+    new ServiceTicket(
+        10, 
+        "", 
+        null, 
+        2, 
+        "New hardware request - additional RAM for laptop.", 
+        false, 
+        null
+    ),
+    new ServiceTicket(
+        11, 
+        "Customer - email issue", 
+        null, 
+        8, 
+        "Unable to send emails to external domains.", 
+        true, 
+        null
+    ),
+    new ServiceTicket(
+        12, 
+        "", 
+        null, 
+        8, 
+        "VPN connection dropping intermittently.", 
+        false, 
+        null
+    )
 };
 
 var builder = WebApplication.CreateBuilder(args);
