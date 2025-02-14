@@ -225,6 +225,25 @@ app.MapGet("api/employees/{id}/customers", (int id) =>
         .ToList();
     return Results.Ok(employeeTickets);
 });
+// Employee of the month
+app.MapGet("api/employees/employee-of-the-month", () =>
+{
+    var completedTickets = serviceTickets
+        .Where(st => st.EmployeeId.HasValue && st.CustomerId.HasValue && st.DateCompleted.HasValue)
+        .GroupBy(st => st.EmployeeId)
+        // Creating new anonymous object that will return the employee-of-the-month's name and how many tickets closed.
+        .Select(group => new
+        {
+            // group.Key == EmployeeID, the value we grouped by
+            // (Index) can be used since lists are zero-based.
+            EmployeeId = employees[(Index)group.Key].Name,
+            CompletedTickets = group.Count() // each ticket in each group is being counted to return the employee with most closes.
+        })
+        .OrderByDescending(x => x.CompletedTickets)
+        .FirstOrDefault();
+        
+    return Results.Ok(completedTickets);
+});
 
 // Available Employees.
 app.MapGet("api/employees/available", () =>
