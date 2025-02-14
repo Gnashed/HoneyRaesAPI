@@ -57,13 +57,13 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
     new ServiceTicket(
         5,"Employee - pw reset", null, null, "Needs password reset for Outlook.", true, null),
     
-    new ServiceTicket(6, "Customer - printer issue", 2, null, "Printer is not connecting to the network.", 
+    new ServiceTicket(6, "Customer - printer issue", 2, 4, "Printer is not connecting to the network.", 
         false, new DateTime(2024, 11, 15)),
 
-    new ServiceTicket(7, "", null, 3, "Software installation request for project management tool.", 
+    new ServiceTicket(7, "", 8, 4, "Software installation request for project management tool.", 
         false, null),
 
-    new ServiceTicket(8, "", null, 3, "Account locked due to too many failed login attempts.", 
+    new ServiceTicket(8, "", 6, 4, "Account locked due to too many failed login attempts.", 
         true, null),
 
     new ServiceTicket(9, "Employee - software crash", null, null, "Design software crashes frequently.", 
@@ -146,6 +146,15 @@ app.MapGet("api/employees/{id}", (int id) =>
     employee.ServiceTickets = serviceTickets.Where(st => st.EmployeeId == id).ToList();
     return Results.Ok(employee);
 });
+// Employee's customers.
+app.MapGet("api/employees/{id}/customers", (int id) =>
+{
+    var employeeTickets = serviceTickets
+        .Where(t => t.EmployeeId == id && t.CustomerId.HasValue)
+        .ToList();
+    return Results.Ok(employeeTickets);
+});
+
 // Available Employees.
 app.MapGet("api/employees/available", () =>
 {
