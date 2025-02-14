@@ -10,6 +10,16 @@ List<Customer> customers = new List<Customer>
     new Customer(1, "John Dough", "456 Guap Rd, Madison, TN, 37001"),
     new Customer(2, "Mariah Rice", "1234 Apple Street, Los Angeles, CA, 90001"),
     new Customer(3, "Jane Though", "345 E. Rock St., New York, NY, 10001"),
+    new Customer(4, "Michael Stone", "789 Maple Ave, Chicago, IL, 60601"),
+    new Customer(5, "Sarah Bloom", "987 Oak Lane, Miami, FL, 33101"),
+    new Customer(6, "Kevin Fields", "654 Pine Blvd, Denver, CO, 80201"),
+    new Customer(7, "Emily Lake", "321 River Rd, Seattle, WA, 98101"),
+    new Customer(8, "David Peak", "159 Mountain St, Phoenix, AZ, 85001"),
+    new Customer(9, "Olivia Shore", "741 Ocean Dr, San Diego, CA, 92101"),
+    new Customer(10, "Lucas Grove", "852 Forest Path, Portland, OR, 97201"),
+    new Customer(11, "Mia Stone", "963 Desert Rd, Las Vegas, NV, 89101"),
+    new Customer(12, "Ethan Brook", "159 Sunset Blvd, Austin, TX, 73301"),
+    new Customer(13, "Ava Meadows", "753 Hilltop Ln, Nashville, TN, 37201")
 };
 
 List<Employee> employees = new List<Employee>
