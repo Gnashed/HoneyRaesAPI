@@ -10,18 +10,28 @@ List<Customer> customers = new List<Customer>
     new Customer(1, "John Dough", "456 Guap Rd, Madison, TN, 37001"),
     new Customer(2, "Mariah Rice", "1234 Apple Street, Los Angeles, CA, 90001"),
     new Customer(3, "Jane Though", "345 E. Rock St., New York, NY, 10001"),
+    new Customer(4, "Michael Stone", "789 Maple Ave, Chicago, IL, 60601"),
+    new Customer(5, "Sarah Bloom", "987 Oak Lane, Miami, FL, 33101"),
+    new Customer(6, "Kevin Fields", "654 Pine Blvd, Denver, CO, 80201"),
+    new Customer(7, "Emily Lake", "321 River Rd, Seattle, WA, 98101"),
+    new Customer(8, "David Peak", "159 Mountain St, Phoenix, AZ, 85001"),
+    new Customer(9, "Olivia Shore", "741 Ocean Dr, San Diego, CA, 92101"),
+    new Customer(10, "Lucas Grove", "852 Forest Path, Portland, OR, 97201"),
+    new Customer(11, "Mia Stone", "963 Desert Rd, Las Vegas, NV, 89101"),
+    new Customer(12, "Ethan Brook", "159 Sunset Blvd, Austin, TX, 73301"),
+    new Customer(13, "Ava Meadows", "753 Hilltop Ln, Nashville, TN, 37201")
 };
 
 List<Employee> employees = new List<Employee>
 {
     new Employee(1, "Tion Blackmon", "Software Engineer"),
-    new Employee(2, "Mia Meadows", "Business Analyst"),
+    new Employee(2, "Mia Meadows", "Technical Analyst"),
     new Employee(3, "Liam Anderson", "Project Manager"),
-    new Employee(4, "Sophia Chang", "UX Designer"),
+    new Employee(4, "Sophia Chang", "Senior Tech Analyst"),
     new Employee(5, "Ethan Martinez", "DevOps Engineer"),
     new Employee(6, "Ava Hernandez", "Quality Assurance Analyst"),
     new Employee(7, "Noah Thompson", "Product Owner"),
-    new Employee(8, "Olivia Brown", "Data Scientist"),
+    new Employee(8, "Olivia Brown", "Technical Analyst"),
     new Employee(9, "Mason Lee", "Frontend Developer"),
     new Employee(10, "Isabella Patel", "Backend Developer"),
     new Employee(11, "Lucas Nguyen", "Security Specialist"),
@@ -30,43 +40,159 @@ List<Employee> employees = new List<Employee>
 
 List<ServiceTicket> serviceTickets = new List<ServiceTicket>
 {
-    new ServiceTicket(1,"Customer - keyboard issue", 1, null, "Customer was having issues with their keyboard.",
-            false, new DateTime(2024, 1, 22)
-        ),
     new ServiceTicket(
-        2,"", null, 1,"Locked out of cloud backup app", 
-        false, new DateTime(2025, 1, 4)
-        ),
+        1,
+        "Keyboard issue",
+        4, 
+        2, 
+        "Customer was having issues with their Bluetooth keyboard.",
+        false, 
+        new DateTime(2024, 1, 22)
+    ),
     new ServiceTicket(
-        3,"", null, 1, "Employee lost external storage drive and needs a replacement.", 
-        true, null),
+        2,
+        "Account Locked", 
+        5, 
+        2,
+        "Locked out of cloud backup app", 
+        false, 
+        new DateTime(2025, 1, 4)
+    ),
     new ServiceTicket(
-        4,"", null, 2, "Employee forgot their password to Outlook.",
-        true, new DateTime(2024, 12, 23)
-        ),
+        3,
+        "External SSD Replacement Needed",
+        null,
+        2,
+        "Employee lost external storage drive and needs a replacement.",
+        true,
+        new DateTime(2025, 2, 12)
+    ),
     new ServiceTicket(
-        5,"Employee - pw reset", null, null, "Needs password reset for Outlook.", true, null),
-    
-    new ServiceTicket(6, "Customer - printer issue", 2, null, "Printer is not connecting to the network.", 
-        false, new DateTime(2024, 11, 15)),
-
-    new ServiceTicket(7, "", null, 3, "Software installation request for project management tool.", 
-        false, null),
-
-    new ServiceTicket(8, "", null, 3, "Account locked due to too many failed login attempts.", 
-        true, null),
-
-    new ServiceTicket(9, "Employee - software crash", null, null, "Design software crashes frequently.", 
-        false, null),
-
-    new ServiceTicket(10, "", null, 2, "New hardware request - additional RAM for laptop.", 
-        false, null),
-
-    new ServiceTicket(11, "Customer - email issue", null, 8, "Unable to send emails to external domains.", 
-        true, null),
-
-    new ServiceTicket(12, "", null, 8, "VPN connection dropping intermittently.", 
-        false, null)
+        4,
+        "Outlook PW Issue",
+        9,
+        8,
+        "Employee forgot their password to Outlook.",
+        true,
+        new DateTime(2024, 12, 23)
+    ),
+    new ServiceTicket(
+        5,
+        "Outlook pw reset", 
+        10, 
+        4, 
+        "Needs password reset for Outlook.", 
+        true, 
+        new DateTime(2025, 2, 6)
+    ),
+    new ServiceTicket(
+        6, 
+        "Customer - printer issue", 
+        6, 
+        4,
+        "Printer is not connecting to the network.", 
+        false, 
+        new DateTime(2025, 2, 5)
+    ),
+    new ServiceTicket(
+        7, 
+        "",
+        8,
+        4,
+        "Software installation request for project management tool.", 
+        false,
+        null
+    ),
+    new ServiceTicket(
+        8, 
+        "Out of date NPM Package.", 
+        11, 
+        1, 
+        "NPM package for our calendar integration is out of date.",
+        true, 
+        new DateTime(2025, 2, 3)
+    ),
+    new ServiceTicket(
+        9, 
+        "Endpoint issue on backend.",
+        13,
+        1,
+        "I'm receiving an error that a GET request failed due to an issue. It doesn't specify (sorry).",
+        true,
+        new DateTime(2025, 2, 4)
+    ),
+    new ServiceTicket(
+        10, 
+        "Frontend issue on EAP landing page.", 
+        7, 
+        1, 
+        "The form to submit information isn't rendering after clicking on any of the fields. Very odd issue.", 
+        true, 
+        null
+    ),
+    new ServiceTicket(
+        11, 
+        "Email outgoing issue", 
+        null, 
+        8, 
+        "Unable to send emails to external domains.", 
+        true, 
+        null
+    ),
+    new ServiceTicket(
+        12, 
+        "VPN Connection Problems", 
+        null, 
+        8, 
+        "VPN connection dropping intermittently.", 
+        true, 
+        null
+    ),
+    new ServiceTicket(
+        13, 
+        "Network Connectivity Issue", 
+        5, 
+        null,
+        "Intermittent network connectivity issues in the main office.",
+        false, 
+        null
+    ),
+    new ServiceTicket(
+        14, 
+        "Software Update Required", 
+        7, 
+        4,
+        "Outdated software version causing compatibility issues.",
+        false, 
+        null
+    ),
+    new ServiceTicket(
+        15, 
+        "Hardware Replacement Needed", 
+        2, 
+        null,
+        "Customer's hard drive is failing and needs to be replaced.",
+        true, 
+        null
+    ),
+    new ServiceTicket(
+        16, 
+        "VPN Access Request", 
+        9, 
+        6,
+        "New employee needs VPN access configured for remote work.",
+        false, 
+        null
+    ),
+    new ServiceTicket(
+        17, 
+        "Printer Not Responding", 
+        3, 
+        null,
+        "Printer in the finance department is unresponsive.",
+        false, 
+        null
+    ),
 };
 
 var builder = WebApplication.CreateBuilder(args);
@@ -107,6 +233,16 @@ app.UseCors("AllowMobileApp");
 app.MapGet("api/servicetickets", () => serviceTickets);
 app.MapGet("api/employees", () => employees);
 app.MapGet("api/customers", () => customers);
+
+// Completed Tickets ordered by completion date (oldest first).
+app.MapGet("api/servicetickets/completed-oldest-sorted", () =>
+{
+    var completedTickets = serviceTickets
+        .Where(st => st.DateCompleted.HasValue && st.CustomerId.HasValue && st.EmployeeId.HasValue)
+        .OrderBy(st => st.DateCompleted)
+        .ToList();
+    return Results.Ok(completedTickets);
+});
 // Emergency Tickets
 app.MapGet("api/servicetickets/emergencies", () =>
 {
@@ -115,6 +251,18 @@ app.MapGet("api/servicetickets/emergencies", () =>
             (st.DateCompleted == null) && (st.Emergency)
         ).ToList();
     return Results.Ok(emergencyTickets);
+});
+// Prioritized Tickets
+app.MapGet("api/servicetickets/priority", () =>
+{
+    var prioritizedTickets = serviceTickets
+        .Where(st => st.DateCompleted == null)
+        .OrderBy(st => st.Emergency)
+        .ThenBy(st => st.EmployeeId == null)
+        .ThenBy(st => st.EmployeeId)
+        .Reverse()
+        .ToList();
+    return Results.Ok(prioritizedTickets);
 });
 app.MapGet("api/servicetickets/{id}", (int id) =>
 {
@@ -136,6 +284,34 @@ app.MapGet("api/employees/{id}", (int id) =>
     employee.ServiceTickets = serviceTickets.Where(st => st.EmployeeId == id).ToList();
     return Results.Ok(employee);
 });
+// Employee's customers.
+app.MapGet("api/employees/{id}/customers", (int id) =>
+{
+    var employeeTickets = serviceTickets
+        .Where(t => t.EmployeeId == id && t.CustomerId.HasValue)
+        .ToList();
+    return Results.Ok(employeeTickets);
+});
+// Employee of the month
+app.MapGet("api/employees/employee-of-the-month", () =>
+{
+    var completedTickets = serviceTickets
+        .Where(st => st.EmployeeId.HasValue && st.CustomerId.HasValue && st.DateCompleted.HasValue)
+        .GroupBy(st => st.EmployeeId)
+        // Creating new anonymous object that will return the employee-of-the-month's name and how many tickets closed.
+        .Select(group => new
+        {
+            // group.Key == EmployeeID, the value we grouped by
+            // (Index) can be used since lists are zero-based.
+            EmployeeId = employees[(Index)group.Key].Name,
+            CompletedTickets = group.Count() // each ticket in each group is being counted to return the employee with most closes.
+        })
+        .OrderByDescending(x => x.CompletedTickets)
+        .FirstOrDefault();
+        
+    return Results.Ok(completedTickets);
+});
+
 // Available Employees.
 app.MapGet("api/employees/available", () =>
 {
