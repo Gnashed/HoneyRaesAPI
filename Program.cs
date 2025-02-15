@@ -118,7 +118,7 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
         13,
         1,
         "I'm receiving an error that a GET request failed due to an issue. It doesn't specify (sorry).",
-        false,
+        true,
         new DateTime(2025, 2, 4)
     ),
     new ServiceTicket(
@@ -127,8 +127,8 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
         7, 
         1, 
         "The form to submit information isn't rendering after clicking on any of the fields. Very odd issue.", 
-        false, 
-        new DateTime(2025, 2, 12)
+        true, 
+        null
     ),
     new ServiceTicket(
         11, 
@@ -145,9 +145,54 @@ List<ServiceTicket> serviceTickets = new List<ServiceTicket>
         null, 
         8, 
         "VPN connection dropping intermittently.", 
+        true, 
+        null
+    ),
+    new ServiceTicket(
+        13, 
+        "Network Connectivity Issue", 
+        5, 
+        null,
+        "Intermittent network connectivity issues in the main office.",
         false, 
         null
-    )
+    ),
+    new ServiceTicket(
+        14, 
+        "Software Update Required", 
+        7, 
+        4,
+        "Outdated software version causing compatibility issues.",
+        false, 
+        null
+    ),
+    new ServiceTicket(
+        15, 
+        "Hardware Replacement Needed", 
+        2, 
+        null,
+        "Customer's hard drive is failing and needs to be replaced.",
+        true, 
+        null
+    ),
+    new ServiceTicket(
+        16, 
+        "VPN Access Request", 
+        9, 
+        6,
+        "New employee needs VPN access configured for remote work.",
+        false, 
+        null
+    ),
+    new ServiceTicket(
+        17, 
+        "Printer Not Responding", 
+        3, 
+        null,
+        "Printer in the finance department is unresponsive.",
+        false, 
+        null
+    ),
 };
 
 var builder = WebApplication.CreateBuilder(args);
@@ -206,6 +251,18 @@ app.MapGet("api/servicetickets/emergencies", () =>
             (st.DateCompleted == null) && (st.Emergency)
         ).ToList();
     return Results.Ok(emergencyTickets);
+});
+// Prioritized Tickets
+app.MapGet("api/servicetickets/priority", () =>
+{
+    var prioritizedTickets = serviceTickets
+        .Where(st => st.DateCompleted == null)
+        .OrderBy(st => st.Emergency)
+        .ThenBy(st => st.EmployeeId == null)
+        .ThenBy(st => st.EmployeeId)
+        .Reverse()
+        .ToList();
+    return Results.Ok(prioritizedTickets);
 });
 app.MapGet("api/servicetickets/{id}", (int id) =>
 {
